@@ -13,30 +13,33 @@
 
     <version>1.0-SNAPSHOT</version>
 
+    <name>Emergency Ambulance Dispatch System</name>
+
+    <description>
+        Real-Time Emergency Ambulance Dispatch and Tracking System
+    </description>
+
     <properties>
 
-        <maven.compiler.source>17</maven.compiler.source>
+        <!-- Java 25 -->
+        <maven.compiler.release>25</maven.compiler.release>
 
-        <maven.compiler.target>17</maven.compiler.target>
-
+        <!-- UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- JUnit 5 -->
+        <junit.version>5.11.0</junit.version>
 
     </properties>
 
     <dependencies>
 
-        <!-- JUnit 5 for testing -->
-
+        <!-- JUnit 5 -->
         <dependency>
-
             <groupId>org.junit.jupiter</groupId>
-
             <artifactId>junit-jupiter</artifactId>
-
-            <version>5.10.2</version>
-
+            <version>${junit.version}</version>
             <scope>test</scope>
-
         </dependency>
 
     </dependencies>
@@ -45,28 +48,37 @@
 
         <plugins>
 
-            <!-- Java Compiler -->
-
+            <!-- Maven Compiler Plugin -->
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
-
                 <artifactId>maven-compiler-plugin</artifactId>
-
                 <version>3.13.0</version>
 
+                <configuration>
+                    <release>25</release>
+                </configuration>
             </plugin>
 
-            <!-- JUnit Test Runner -->
-
+            <!-- Maven Surefire Plugin for JUnit 5 -->
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
-
                 <artifactId>maven-surefire-plugin</artifactId>
-
                 <version>3.2.5</version>
+            </plugin>
 
+            <!-- Maven Jar Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.ambulance.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
 
         </plugins>
