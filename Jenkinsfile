@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
         jdk 'JDK25'
+        maven 'Maven3.9.14'
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Joshitha09-josh/EmergencyAmbulanceDispatchSystem.git'
+                echo 'Checking out source code...'
+                checkout scm
             }
         }
 
@@ -24,18 +24,21 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo 'Building the Emergency Ambulance Dispatch System...'
                 bat 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
+                echo 'Running unit tests...'
                 bat 'mvn clean test'
             }
         }
 
         stage('Package') {
             steps {
+                echo 'Packaging application...'
                 bat 'mvn package -DskipTests'
             }
         }
@@ -43,11 +46,17 @@ pipeline {
 
     post {
         success {
-            echo 'Emergency Ambulance Dispatch System CI/CD completed successfully!'
+            echo '======================================'
+            echo 'CI/CD PIPELINE SUCCESSFUL'
+            echo 'Emergency Ambulance Dispatch System'
+            echo '======================================'
         }
 
         failure {
-            echo 'Build or tests failed. Check the Jenkins console output.'
+            echo '======================================'
+            echo 'CI/CD PIPELINE FAILED'
+            echo 'Check the console output for details.'
+            echo '======================================'
         }
     }
 }
